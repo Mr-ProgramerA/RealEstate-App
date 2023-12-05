@@ -1,0 +1,16 @@
+{
+  "name": "estate_mernproject",
+  "version": "1.0.0",
+  "description": "Real Estate web application using MERN and tailwind css.\r This is an ongoing practice project for developing a Real Estate web application. The application aims to provide users with a platform to browse, search, and inquire about real estate properties.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon api/index.js",
+    "start": "node api/index.js"
+  },
+  "author": "Mr Programmer",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
