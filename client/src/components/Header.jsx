@@ -8,11 +8,11 @@ function Header() {
       <div className="flex items-center justify-between max-w-6xl p-3 mx-auto ">
         <Link to ="/" > 
         <h1 className="flex flex-wrap font-bold me-2 ">
-          <span className="pt-0 pb-0 mt-0 mb-0 text-red-500 text-md/4 sm:text-xl md:text-2xl lg:text-3xl ms-0 ">Real</span>
-          <span className="pt-0 pb-0 mt-0 mb-0 text-md/4 sm:text-xl md:text-2xl lg:text-3xl ms-0 text-slate-600">Estate</span>
+          <span className="py-0 my-0 text-red-500 text-md/4 sm:text-xl md:text-2xl lg:text-3xl ms-0 ">Real</span>
+          <span className="py-0 my-0 text-md/4 sm:text-xl md:text-2xl lg:text-3xl ms-0 text-slate-600">Estate</span>
         </h1>
         </Link> 
-        <form className="flex items-center w-24 pt-1 pb-1 rounded-lg ps-2 pe-2 sm:w-64 md:p-3 bg-slate-50">
+        <form className="flex items-center w-24 px-2 py-0 rounded-lg sm:py-1 sm:w-64 md:p-3 bg-slate-50">
           <input type="text" placeholder="Search..." className="bg-transparent focus:outline-none" />
         <FaSearch className="text-slate-500 hover:cursor-pointer active:text-black" />
         </form>
