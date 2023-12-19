@@ -74,9 +74,9 @@ function SignUp() {
 
         <button
           disabled={loading}
-          className="p-3 disabled:cursor-progress text-white uppercase rounded-lg active:bg-sky-800 active:border-double hover:bg-slate-800 disabled:opacity-75 bg-slate-700"
+          className="p-3 text-white uppercase rounded-lg disabled:cursor-progress active:bg-sky-800 active:border-double hover:bg-slate-800 disabled:opacity-75 bg-slate-700"
         >
-          {loading ? "Loading....." : "Submit"}
+          {loading ? "Creating an account..." : "Sign Up"}
         </button>
       </form>
       <div className="flex gap-2 mt-5">
@@ -85,7 +85,7 @@ function SignUp() {
           <span className="text-blue-900">Sign In</span>
         </Link>
       </div>
-      {error && <p className="text-red-600 mt-5">{error}</p>}
+      {error && <p className="mt-5 text-red-600">{error}</p>}
     </div>
   );
 }
