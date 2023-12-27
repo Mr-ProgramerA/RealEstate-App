@@ -14,7 +14,7 @@ function OAuth() {
   const dispatch = useDispatch();
   const handleGoogleClick = async () => {
     try {
-      dispatch(signInStart());
+      // dispatch(signInStart());
       const provider = new GoogleAuthProvider();
       const auth = getAuth(app);
       const result = await signInWithPopup(auth, provider);
@@ -45,9 +45,9 @@ function OAuth() {
       onClick={handleGoogleClick}
       disabled={loading}
       type="button"
-      className="p-3 text-white uppercase bg-red-700 rounded-lg hover:opacity-95 active:cursor-progress disabled:bg-green-600 disabled:cursor-progress"
+      className="p-3 text-white uppercase bg-red-700 rounded-lg hover:opacity-95 active:cursor-progress disabled:opacity-95 disabled:cursor-progress"
     >
-      {loading ? "Getting in by Google..." : "Continue With Google"}
+    Continue With Google
     </button>
   );
 }
