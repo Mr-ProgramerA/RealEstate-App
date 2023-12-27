@@ -52,7 +52,7 @@ function SignUp() {
         <input
           type="text"
           placeholder="Username"
-          className="z-20 p-3 border rounded-lg"
+          className="z-20 p-3 border rounded-lg shadow-sm shadow-gray-500"
           id="username"
           onChange={handleChange}
         />
@@ -60,7 +60,7 @@ function SignUp() {
         <input
           type="email"
           placeholder="Email"
-          className="z-20 p-3 border rounded-lg"
+          className="z-20 p-3 border rounded-lg shadow-sm shadow-gray-500"
           id="email"
           onChange={handleChange}
         />
@@ -68,7 +68,7 @@ function SignUp() {
         <input
           type="password"
           placeholder="Password"
-          className="z-20 p-3 border rounded-lg"
+          className="z-20 p-3 border rounded-lg shadow-sm shadow-gray-500"
           id="password"
           onChange={handleChange}
         />
