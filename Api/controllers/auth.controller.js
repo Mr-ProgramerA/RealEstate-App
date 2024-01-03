@@ -4,20 +4,7 @@ import { errorHandler } from "../utils/error.js";
 import jwt from "jsonwebtoken";
 
 export const signup = async (req, res, next) => {
-  const { username, email, password } = req.body;
-
- 
-
-  if (
-    req.body === null || // Check if req.body is null
-    typeof req.body !== "object" || // Check if req.body is an object
-    Object.keys(req.body).length === 0 || // Check if req.body is an empty object // Check if any of the required fields are missing or empty
-    req.body.username === null ||
-    req.body.username === undefined ||
-    req.body.username.trim() === "" ||
-    req.body.email === null ||
-    req.body.email === undefined ||
-    req.body.email.trim() === "" ||
+  if(
     req.body.password === null ||
     req.body.password === undefined ||
     req.body.password.trim() === ""
@@ -26,16 +13,10 @@ export const signup = async (req, res, next) => {
       errorHandler(400, "Please fill in all required fields correctly.")
     );
   }
-
-  if (
-    /^\d+$/.test(req.body.username.trim()) || // Check if username is all numbers
-    /^\d/.test(req.body.username.trim()) // Check if username starts with a number
-    ) {
-      return next(
-        errorHandler(400, "Incorrect Username!")
-      );
-  }
-
+  
+  const username = req.body.username.trim();
+  const email = req.body.email.trim();
+  const password = req.body.password.trim();
   const hashedPassword = bcryptjs.hashSync(password, 10);
   const newUser = new User({ username, email, password: hashedPassword });
 
@@ -49,7 +30,10 @@ export const signup = async (req, res, next) => {
 };
 
 export const signin = async (req, res, next) => {
-  const { email, password } = req.body;
+  // const {email, password } = req.body
+
+  const email = req.body.email.trim();
+  const password = req.body.password.trim();
   try {
     const validUser = await User.findOne({ email });
     if (!validUser) return next(errorHandler(404, "User not found!"));

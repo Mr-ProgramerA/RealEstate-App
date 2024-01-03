@@ -14,9 +14,9 @@ export const updateUser = async (req, res, next) => {
   if (req.user.id !== req.params.id)
     return next(errorHandler(401, "You are not authorised!"));
   try {
-    if (req.body.password) {
-      req.body.password = bcryptjs.hashSync(req.body.password, 10);
-    }
+    if (req.body.password) req.body.password = bcryptjs.hashSync(req.body.password.trim(), 10);
+    if(req.body.username) req.body.username = req.body.username.trim()     
+    if(req.body.email) req.body.email = req.body.email.trim()
 
     const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
