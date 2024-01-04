@@ -22,9 +22,11 @@ export const inputCheck = (req,res,next) => {
     
       if (
         /^\d+$/.test(req.body.username.trim()) || // Check if username is all numbers
-        /^\d/.test(req.body.username.trim()) // Check if username starts with a number
+        /^\d/.test(req.body.username.trim()) || // Check if username starts with a number
+        /^\d+$/.test(req.body.email.trim()) || // Check if email is all numbers
+        /^\d/.test(req.body.email.trim()) // Check if email starts with a number
       ) {
-        return next(errorHandler(400, "Incorrect Username!"));
+        return next(errorHandler(400, "Invalid Input!"));
       }
       next()
 }

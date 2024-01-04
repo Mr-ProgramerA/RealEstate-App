@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import OAuth from "../components/OAuth";
+import { useSelector, useDispatch } from "react-redux";
+import { SignUpSuccess } from "../redux/user/userSlice";
 
 function SignUp() {
   const [formData, setFormData] = useState({});
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const { error: reduxError } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     try {
@@ -27,10 +31,10 @@ function SignUp() {
         setLoading(false);
         return;
       }
-      setError(null)
+      setError(null);
       setLoading(false);
-      navigate("/sign-in")
-
+      dispatch(SignUpSuccess());
+      navigate("/sign-in");
     } catch (error) {
       setLoading(false);
       setError(error.message);
@@ -79,7 +83,7 @@ function SignUp() {
         >
           {loading ? "Creating an account..." : "Sign Up"}
         </button>
-        <OAuth/>
+        <OAuth />
       </form>
       <div className="flex gap-2 mt-5">
         <p>Having an account?</p>

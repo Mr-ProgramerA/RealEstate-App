@@ -10,7 +10,7 @@ export const signup = async (req, res, next) => {
     req.body.password.trim() === ""
   ) {
     return next(
-      errorHandler(400, "Please fill in all required fields correctly.")
+      errorHandler(400, "Password not valid")
     );
   }
   

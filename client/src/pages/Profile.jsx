@@ -5,6 +5,9 @@ import {
   updateUserStart,
   updateUserSuccess,
   updateUserFailure,
+  deleteUserStart,
+  deleteUserSuccess,
+  deleteUserFailure,
 } from "../redux/user/userSlice.js";
 import {
   getDownloadURL,
@@ -21,7 +24,8 @@ function Profile() {
   const [filePerc, setFilePerc] = useState(0);
   const [fileUploadError, setFileUploadError] = useState(false);
   const [formData, setFormData] = useState({});
-  const [updateSuccess, setupdateSuccess] = useState(false)
+  const [updateSuccess, setupdateSuccess] = useState(false);
+  const [deleting, setDeleting] = useState(false)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   //console.log(formData);
@@ -59,6 +63,11 @@ function Profile() {
       }
     );
   };
+  useEffect(() => {
+    if (file) {
+      handleFileUpload(file);
+    }
+  }, [file]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -79,19 +88,30 @@ function Profile() {
       if (data.success === false) {
         dispatch(updateUserFailure(data.message));
         // navigate("/sign-in");
+        setupdateSuccess(false);
         return;
       }
       dispatch(updateUserSuccess(data));
-      setupdateSuccess(true)
+      setupdateSuccess(true);
     } catch (error) {
       dispatch(updateUserFailure(error.message));
     }
   };
-  useEffect(() => {
-    if (file) {
-      handleFileUpload(file);
+  const handleDelete = async () => {
+    try {
+      // dispatch(deleteUserStart());
+      setDeleting(true)
+      const res = await fetch(`api/user/delete/${currentUser._id}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+      if (data.success === false)
+        return dispatch(deleteUserFailure(data.message));
+      dispatch(deleteUserSuccess());
+    } catch (error) {
+      dispatch(deleteUserFailure(error.message));
     }
-  }, [file]);
+  };
 
   return (
     <div className="max-w-lg p-3 mx-auto">
@@ -165,13 +185,22 @@ function Profile() {
         </button>
       </form>
       <div className="flex justify-between mt-5 font-medium">
-        <span className="text-red-700 capitalize cursor-pointer">
+        <span
+          onClick={handleDelete}
+          className="text-red-700 capitalize cursor-pointer"
+        >
           Delete Account
         </span>
         <span className="text-red-700 capitalize cursor-pointer">Sign Out</span>
       </div>
-      <p className="mt-3 font-mono text-sm text-red-700"> {error? error: ""} </p>
-      <p className="mt-3 font-mono text-sm text-green-700"> {updateSuccess? "User updated successfully" : ""} </p>
+      <p className="mt-3 font-mono text-sm text-red-700">
+        {" "}
+        {error ? error : ""}{" "}
+      </p>
+      <p className="mt-3 font-mono text-sm text-green-700">
+        {" "}
+        {updateSuccess ? "User updated successfully" : ""}{" "}
+      </p>
     </div>
   );
 }

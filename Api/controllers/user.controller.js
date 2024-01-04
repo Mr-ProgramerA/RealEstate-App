@@ -12,11 +12,12 @@ export const test = (req, res) => {
 
 export const updateUser = async (req, res, next) => {
   if (req.user.id !== req.params.id)
-    return next(errorHandler(401, "You are not authorised!"));
+    return next(errorHandler(401, "Access Denied"));
   try {
-    if (req.body.password) req.body.password = bcryptjs.hashSync(req.body.password.trim(), 10);
-    if(req.body.username) req.body.username = req.body.username.trim()     
-    if(req.body.email) req.body.email = req.body.email.trim()
+    if (req.body.password)
+      req.body.password = bcryptjs.hashSync(req.body.password.trim(), 10);
+    if (req.body.username) req.body.username = req.body.username.trim();
+    if (req.body.email) req.body.email = req.body.email.trim();
 
     const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
@@ -33,6 +34,19 @@ export const updateUser = async (req, res, next) => {
     const { password, ...rest } = updatedUser._doc;
     res.status(200).json(rest);
   } catch (error) {
+    next(error);
+  }
+};
+
+export const deleteUser = async (req, res, next) => {
+  if (req.user.id !== req.params.id)
+    return next(errorHandler(401, "Access Denied"));
+  try {
+    await User.findByIdAndDelete(req.params.id);
+    res.clearCookie("access_token")
+    res.status(200).json("User has been deleted")
+  } catch (error) {
+    console.log(error);
     next(error);
   }
 };
