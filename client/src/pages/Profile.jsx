@@ -1,13 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   updateUserStart,
   updateUserSuccess,
   updateUserFailure,
-  deleteUserStart,
+  // deleteUserStart,
   deleteUserSuccess,
   deleteUserFailure,
+  // signOutStart,
+  signOutSuccess,
+  signOutFailure,
 } from "../redux/user/userSlice.js";
 import {
   getDownloadURL,
@@ -25,9 +28,10 @@ function Profile() {
   const [fileUploadError, setFileUploadError] = useState(false);
   const [formData, setFormData] = useState({});
   const [updateSuccess, setupdateSuccess] = useState(false);
-  const [deleting, setDeleting] = useState(false)
+  const [deleting, setDeleting] = useState(false);
+  const [signingOut, setSigningOut] = useState(false);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   //console.log(formData);
   // console.log(currentUser);
   // console.log(filePerc);
@@ -100,16 +104,38 @@ function Profile() {
   const handleDelete = async () => {
     try {
       // dispatch(deleteUserStart());
-      setDeleting(true)
+      setDeleting(true);
       const res = await fetch(`api/user/delete/${currentUser._id}`, {
         method: "DELETE",
       });
       const data = await res.json();
-      if (data.success === false)
-        return dispatch(deleteUserFailure(data.message));
+      if (data.success === false) {
+        setDeleting(false)
+        dispatch(deleteUserFailure(data.message));
+        return;
+      }
       dispatch(deleteUserSuccess());
     } catch (error) {
       dispatch(deleteUserFailure(error.message));
+    }
+  };
+
+  const handleSignOut = async () => {
+    try {
+      setSigningOut(true);
+      const res = await fetch("/api/auth/signout");
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(signOutFailure(data.message));
+        setSigningOut(false);
+        return;
+      }
+      dispatch(signOutSuccess());
+      setSigningOut(false);
+    } catch (error) {
+      console.log(error);
+      dispatch(signOutFailure(error));
+      setSigningOut(false);
     }
   };
 
@@ -189,16 +215,19 @@ function Profile() {
           onClick={handleDelete}
           className="text-red-700 capitalize cursor-pointer"
         >
-          Delete Account
+          {deleting ? "Deleting account..." : "Delete Account"}
         </span>
-        <span className="text-red-700 capitalize cursor-pointer">Sign Out</span>
+        <span
+          onClick={handleSignOut}
+          className="text-red-700 capitalize cursor-pointer"
+        >
+          {signingOut ? "Sigining Out..." : "Sign Out"}
+        </span>
       </div>
       <p className="mt-3 font-mono text-sm text-red-700">
-        {" "}
-        {error ? error : ""}{" "}
+        {error ? error : ""}
       </p>
       <p className="mt-3 font-mono text-sm text-green-700">
-        {" "}
         {updateSuccess ? "User updated successfully" : ""}{" "}
       </p>
     </div>

@@ -4,16 +4,14 @@ import { errorHandler } from "../utils/error.js";
 import jwt from "jsonwebtoken";
 
 export const signup = async (req, res, next) => {
-  if(
+  if (
     req.body.password === null ||
     req.body.password === undefined ||
     req.body.password.trim() === ""
   ) {
-    return next(
-      errorHandler(400, "Password not valid")
-    );
+    return next(errorHandler(400, "Password not valid"));
   }
-  
+
   const username = req.body.username.trim();
   const email = req.body.email.trim();
   const password = req.body.password.trim();
@@ -89,6 +87,16 @@ export const google = async (req, res, next) => {
         .status(201)
         .json(rest);
     }
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const signOut = async (req, res, next) => {
+  try {
+    console.log("logging out");
+    res.clearCookie("access_token");
+    res.status(200).json("User logged out");
   } catch (error) {
     next(error);
   }
