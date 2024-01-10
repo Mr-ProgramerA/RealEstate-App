@@ -75,7 +75,7 @@ export const {
   // deleteUserStart,
   deleteUserSuccess,
   deleteUserFailure,
-  signOutStart,
+  // signOutStart,
   signOutSuccess,
   signOutFailure,
 } = userSlice.actions;

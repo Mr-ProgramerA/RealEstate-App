@@ -102,6 +102,12 @@ function Profile() {
     }
   };
   const handleDelete = async () => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete your account?"
+    );
+    if (!confirmDelete) {
+      return;
+    }
     try {
       // dispatch(deleteUserStart());
       setDeleting(true);
@@ -110,7 +116,7 @@ function Profile() {
       });
       const data = await res.json();
       if (data.success === false) {
-        setDeleting(false)
+        setDeleting(false);
         dispatch(deleteUserFailure(data.message));
         return;
       }
