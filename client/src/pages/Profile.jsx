@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   updateUserStart,
   updateUserSuccess,
@@ -146,8 +147,8 @@ function Profile() {
   };
 
   return (
-    <div className="max-w-lg p-3 mx-auto">
-      <h1 className="text-3xl font-semibold text-center my-7">Profile</h1>
+    <div className="max-w-lg px-3 mx-auto">
+      <h1 className="mt-4 mb-2 text-3xl font-semibold text-center">Profile</h1>
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         {/* firebase rules:-
       allow read
@@ -215,6 +216,12 @@ function Profile() {
         >
           {loading ? "Updating Profile..." : "Update"}
         </button>
+        <Link
+          to="/create-listing"
+          className="p-3 text-center text-white uppercase bg-green-700 rounded-lg hover:opacity-95"
+        >
+          Create Listing
+        </Link>
       </form>
       <div className="flex justify-between mt-5 font-medium">
         <span

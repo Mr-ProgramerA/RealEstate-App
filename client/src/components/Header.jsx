@@ -19,7 +19,7 @@ function Header() {
             </span>
           </h1>
         </Link>
-        <form className="flex items-center w-24 px-2 py-0 rounded-lg sm:py-1 sm:w-64 md:p-3 bg-slate-50">
+        <form className="flex items-center w-1/3 px-2 py-1 rounded-lg sm:py-1 sm:w-64 md:p-3 bg-slate-50">
           <input
             type="text"
             placeholder="Search..."
