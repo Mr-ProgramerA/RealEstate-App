@@ -4,7 +4,7 @@
 
 body{
     background-color: rgb(243, 241, 225);
-    
+    overflow-x: hidden;
     /* hsfdsjkl; */
     /* background-color: rgb(105, 133, 56); */
 }

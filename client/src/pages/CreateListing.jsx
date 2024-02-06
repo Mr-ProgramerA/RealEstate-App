@@ -158,7 +158,7 @@ function CreateListing() {
             return { ...prevFormData, [e.target.id]: e.target.value };
           } else if (e.target.type === "number") {
             if (e.target.value === "")
-              return { ...prevFormData, [e.target.id]: 0 };
+              return { ...prevFormData, [e.target.id]: e.target.value };
             return { ...prevFormData, [e.target.id]: parseInt(e.target.value) };
           }
 
