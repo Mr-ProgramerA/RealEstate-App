@@ -9,6 +9,8 @@ import { FaMapMarkerAlt, FaBed, FaBath } from "react-icons/fa";
 import { LuParkingCircle, LuParkingCircleOff } from "react-icons/lu";
 import { MdChair } from "react-icons/md";
 import { BiHomeAlt2 } from "react-icons/bi";
+import { useSelector } from "react-redux";
+import Contact from "../components/Contact";
 
 function Listing() {
   SwiperCore.use([Navigation]);
@@ -17,6 +19,8 @@ function Listing() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [contact, setContact] = useState(false);
+  const { currentUser } = useSelector((state) => state.user);
   useEffect(() => {
     const fetchListing = async () => {
       try {
@@ -91,58 +95,67 @@ function Listing() {
               <FaMapMarkerAlt className="text-green-700" /> {listing.address}
             </p>
             <div className="flex gap-3 px-3 mt-3">
-              <p className="text-lg bg-blue-950 p-2 text-white rounded-lg w-full max-w-[200px] text-center ">
+              <p className="text-lg p-1 font-semibold h-fit text-indigo-200 rounded-full bg-indigo-900 w-full max-w-[200px] text-center">
                 {listing.type === "rent" ? "For Rent" : "For Sale"}
               </p>
               {listing.offer && (
-                <p className="text-lg bg-green-800 p-2 text-white rounded-lg w-full max-w-[200px] text-center ">
-                  &#x20B9;{+listing.regularPrice - +listing.discountPrice}
+                <p className="text-lg p-1  font-semibold h-fit text-green-200 rounded-full bg-green-900 w-full max-w-[200px] text-center">
+                  &#x20B9;{+listing.regularPrice - +listing.discountPrice}{" "}
                   discount
                 </p>
               )}
             </div>
-            <p className="my-4">
+            <p className="my-4 text-justify">
               <span className="text-lg font-medium text-black">
                 Description:
               </span>
               {" " + listing.description}
             </p>
-            <ul className="flex flex-wrap items-center gap-4 p-1 font-semibold sm:gap-6">
+            <ul className="flex flex-wrap items-center gap-4 p-1 mb-4 font-semibold sm:gap-6">
               <li className="flex items-center gap-1 text-emerald-700 whitespace-nowrap">
-                <FaBed classname="text-lg" />
+                <FaBed className="text-lg" />
                 {listing.bedrooms > 1
                   ? `${listing.bedrooms} beds`
                   : `${listing.bedrooms} bed`}
               </li>
               <li className="flex items-center gap-1 text-emerald-700 whitespace-nowrap">
-                <FaBath classname="text-lg" />
+                <FaBath className="text-lg" />
                 {listing.bathrooms > 1
                   ? `${listing.bathrooms} baths`
                   : `${listing.bathrooms} bath`}
               </li>
               {listing.parking ? (
                 <li className="flex items-center gap-1 whitespace-nowrap text-emerald-700">
-                  <LuParkingCircle classname="text-lg" />
+                  <LuParkingCircle className="text-lg" />
                   <span>Parking spot</span>
                 </li>
               ) : (
                 <li className="flex items-center gap-1 whitespace-nowrap text-amber-600">
-                  <LuParkingCircleOff classname="text-lg" />
+                  <LuParkingCircleOff className="text-lg" />
                   <span>No Parking</span>
                 </li>
               )}
               {listing.furnished ? (
                 <li className="flex items-center gap-1 whitespace-nowrap text-emerald-700">
-                  <MdChair classname="text-lg" />
+                  <MdChair className="text-lg" />
                   <span>Furnished</span>
                 </li>
               ) : (
                 <li className="flex items-center gap-1 whitespace-nowrap text-amber-600">
-                  <BiHomeAlt2 classname="text-lg" />
+                  <BiHomeAlt2 className="text-lg" />
                   <span>Unfurnished</span>
                 </li>
               )}
             </ul>
+            {currentUser && currentUser._id !== listing.userRef && !contact && (
+              <button
+                onClick={() => setContact(true)}
+                className="w-full max-w-lg p-2 mx-auto text-white uppercase rounded-lg hover:opacity-90 bg-slate-700"
+              >
+                Contact Landlord
+              </button>              
+            )}
+            {contact && <Contact listing = {listing}/>}
           </div>
         </div>
       )}
