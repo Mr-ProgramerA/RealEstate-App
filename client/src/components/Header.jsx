@@ -7,7 +7,7 @@ function Header() {
   const { currentUser } = useSelector((state) => state.user);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const urlParams = new URLSearchParams(window.location.search);
@@ -15,11 +15,12 @@ function Header() {
     const searchQuery = urlParams.toString();
     navigate(`/search?${searchQuery}`);
   };
-  
+
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
     const searchTermFromUrl = urlParams.get("searchTerm");
     if (searchTermFromUrl) setSearchTerm(searchTermFromUrl);
+    if (searchTermFromUrl === "") setSearchTerm("");
   }, [location.search]);
   return (
     <header className="w-screen shadow-md bg-slate-200">
@@ -35,13 +36,13 @@ function Header() {
           </h1>
         </Link>
         <form
-          className="flex items-center w-1/3 px-2 py-1 rounded-lg sm:py-1 sm:w-64 md:p-3 bg-slate-50"
+          className="flex items-center justify-between w-1/3 px-2 py-1 rounded-lg sm:py-1 sm:w-64 md:p-3 bg-slate-50"
           onSubmit={handleSubmit}
         >
           <input
             type="text"
             placeholder="Search..."
-            className="bg-transparent focus:outline-none"
+            className="w-12 min-[280px]:w-16 min-[490px]:w-32 bg-transparent focus:outline-none sm:w-max"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />

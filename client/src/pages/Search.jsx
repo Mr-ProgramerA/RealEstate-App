@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ListingItem from "../components/ListingItem";
 function Search() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -99,7 +100,6 @@ function Search() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const urlParams = new URLSearchParams();
-    console.log(sidebarData.furnished);
     urlParams.set("searchTerm", sidebarData.searchTerm);
     urlParams.set("type", sidebarData.type);
     urlParams.set("parking", sidebarData.parking);
@@ -111,13 +111,12 @@ function Search() {
     const searchQuery = urlParams.toString();
     navigate(`/search?${searchQuery}`);
   };
-
   return (
     <div className="flex flex-col md:flex-row ">
       <div className="border-b-2 p-7 md:min-h-screen md:border-r-2 md:border-b-0">
-        <form onSubmit={handleSubmit} className="flex flex-col gap-8">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-6 md:gap-8">
           <div className="flex items-center gap-2">
-            <label className="font-medium whitespace-nowrap">
+            <label className="font-medium min-[300px]:whitespace-nowrap">
               Search Term:
             </label>
             <input
@@ -126,7 +125,7 @@ function Search() {
               placeholder="Search..."
               value={sidebarData.searchTerm}
               onChange={handleChange}
-              className="w-full p-2 border rounded-lg"
+              className="w-full max-w-md p-2 border rounded-lg"
             />
           </div>
 
@@ -218,10 +217,28 @@ function Search() {
           </button>
         </form>
       </div>
-      <div>
+      <div className="flex flex-col flex-1 gap-4">
         <h1 className="w-full p-3 text-2xl font-semibold border-b md:mt-5 md:text-3xl text-slate-800">
           Listing Results:
         </h1>
+        {loading ? (
+          <div>
+            <p className="text-xl text-center text-slate-700">Loading...</p>
+          </div>
+        ) : (
+          <div className="flex flex-wrap gap-6 p-4">
+            {!loading && listings.length === 0 && (
+              <p className="w-full text-xl text-center md:p-3 text-slate-700">
+                No Listings found
+              </p>
+            )}
+            {!loading &&
+              listings &&
+              listings.map((listing) => (
+                <ListingItem key={listing._id} listing={listing} />
+              ))}
+          </div>
+        )}
       </div>
     </div>
   );
