@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 body{
-    background-color: rgb(245, 245, 240);
+    background-color: rgb(237, 237, 229);
     overflow-x: hidden;
     /* hsfdsjkl; */
-    /* background-color: grey; */
+    /* background-color: rgb(44, 40, 40); */
 }

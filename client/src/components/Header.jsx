@@ -27,11 +27,14 @@ function Header() {
       <div className="flex items-center justify-between max-w-6xl p-3 mx-auto ">
         <Link to="/">
           <h1 className="flex flex-wrap font-bold me-2 ">
-            <span className="py-0 my-0 text-red-500 text-md/4 sm:text-xl md:text-2xl lg:text-3xl ms-0 ">
+            <span className="py-0 my-0 text-xl text-slate-500 text-md/4 sm:text-2xl lg:text-3xl ms-0">
               Real
             </span>
-            <span className="py-0 my-0 text-md/4 sm:text-xl md:text-2xl lg:text-3xl ms-0 text-slate-600">
+            <span className="max-[325px]:hidden py-0 my-0 text-md/4 sm:text-2xl lg:text-3xl ms-0 text-slate-600 text-xl">
               Estate
+            </span>
+            <span className="py-0 my-0 text-xl text-rose-500 text-md/4 sm:text-2xl lg:text-3xl ms-0">
+              360
             </span>
           </h1>
         </Link>
