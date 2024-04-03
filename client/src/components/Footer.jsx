@@ -4,7 +4,7 @@ import { FaSquareXTwitter, FaSquareGithub } from "react-icons/fa6";
 
 function Footer() {
   return (
-      <div className="w-full p-3 text-center text-white h-fit bg-slate-900">
+      <div className="w-full p-3 mt-12 text-center text-white h-fit bg-slate-900">
          <div className="max-w-md mx-auto">
         <p className="">Know us on:</p>
         <div className="flex w-full px-20 pt-2 justify-evenly">
