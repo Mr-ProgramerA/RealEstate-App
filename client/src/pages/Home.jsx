@@ -103,9 +103,7 @@ function Home() {
                     backgroundSize: "cover",
                   }}
                   className="md:h-[500px] h-[360px] text-fuchsia-600"
-                >
-                  {listing._id}
-                </div>
+                ></div>
               </SwiperSlide>
             );
           })}
