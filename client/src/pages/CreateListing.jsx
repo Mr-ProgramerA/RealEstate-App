@@ -27,7 +27,6 @@ function CreateListing() {
     parking: false,
     furnished: false,
   });
-  // console.log(formData);
   const [imageUploadError, setImageUploadError] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState(false);
@@ -74,7 +73,6 @@ function CreateListing() {
         (snapshot) => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          // console.log(progress);
         },
         (error) => {
           reject(error);
@@ -188,7 +186,6 @@ function CreateListing() {
       if (data.success === false) {
         setError(data.message);
       }
-      // console.log(data);
       navigate(`/listing/${data._id}`);
     } catch (error) {
       setError(err.message);

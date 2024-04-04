@@ -18,9 +18,7 @@ mongoose
     console.error(err);
   });
 
-  console.log("======= one ========");
 const _dirname = path.resolve();
-console.log(_dirname);
 
 const app = express();
 
@@ -35,12 +33,7 @@ app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/listing", listingRouter);
 
-console.log("======= two ========");
-
-
 app.use(express.static(path.join(_dirname, "/client/dist")));
-
-console.log("======= three ========");
 
 app.use("*", (req, res) => {
   res.sendFile(path.join(_dir, "client", "dist", "index.html"));

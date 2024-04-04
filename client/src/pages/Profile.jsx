@@ -36,11 +36,6 @@ function Profile() {
   const [showListingVisibility, setShowListingVisibility] = useState(true);
   const dispatch = useDispatch();
   // const navigate = useNavigate();
-  // console.log(formData);
-  // console.log(currentUser);
-  // console.log(filePerc);
-  // console.log(fileUploadError);
-  // console.log(formData);
 
   useEffect(() => {
     setFormData({
@@ -79,7 +74,6 @@ function Profile() {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
-    // console.log(formData);
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -156,7 +150,6 @@ function Profile() {
       const data = await res.json();
       if (data.success === false) return setshowListingError(error);
 
-      // console.log(data);
       setShowListingVisibility(false);
       setUserListings(data);
     } catch (error) {

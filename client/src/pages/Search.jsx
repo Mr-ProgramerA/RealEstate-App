@@ -59,7 +59,6 @@ function Search() {
     };
 
     fetchListings();
-    // console.log(listings);
   }, [location.search]);
 
   const handleChange = (e) => {

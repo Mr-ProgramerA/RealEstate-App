@@ -31,7 +31,6 @@ function OAuth() {
         }),
       });
       const data = await res.json();
-      // console.log(data);
       dispatch(signInSuccess(data));
       navigate("/");
     } catch (error) {
@@ -47,7 +46,7 @@ function OAuth() {
       type="button"
       className="p-3 text-white uppercase bg-red-700 rounded-lg hover:opacity-95 active:cursor-progress disabled:opacity-95 disabled:cursor-progress"
     >
-    Continue With Google
+      Continue With Google
     </button>
   );
 }
