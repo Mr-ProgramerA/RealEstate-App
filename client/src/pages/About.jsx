@@ -4,7 +4,7 @@ import { FaSquareXTwitter, FaSquareGithub } from "react-icons/fa6";
 
 function About() {
   return (
-    <div className="max-w-6xl px-20 pt-8 mx-auto text-center">
+    <div className="max-w-6xl px-12 pt-8 mx-auto text-center sm:px-20">
       <h1 className="mb-2 text-3xl font-bold text-slate-800">
         About RealEstate360
       </h1>
@@ -43,17 +43,17 @@ function About() {
         </p>
       </div>
 
-      <div>
+      <div className="flex flex-col w-full gap-5 max-auto">
         <p className="text-neutral-700">Contact Developer:</p>
-        <div className="flex w-full px-20 pt-6 justify-evenly">
+        <div className="flex w-full gap-1 px-20 justify-evenly">
           <a href="https://www.linkedin.com/in/dev-pankaj">
-            <FaLinkedin className="w-10 h-11 text-zinc-800" />
+            <FaLinkedin className="w-11 h-11 text-zinc-800" />
           </a>
           <a href="https://twitter.com/MrPankajDev">
-            <FaSquareXTwitter className="w-10 h-11 text-zinc-800" />
+            <FaSquareXTwitter className="w-11 h-11 text-zinc-800" />
           </a>
           <a href="https://github.com/Mr-ProgramerA">
-            <FaSquareGithub className="w-10 h-11 text-zinc-800" />
+            <FaSquareGithub className="w-11 h-11 text-zinc-800" />
           </a>
         </div>
       </div>
