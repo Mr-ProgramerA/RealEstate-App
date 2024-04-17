@@ -70,8 +70,9 @@ function Home() {
       </div> */}
       <div className="flex flex-col w-full max-w-6xl gap-3 px-5 py-5 mx-auto md:px-12 md:gap-4 md:py-20">
         <h1 className="text-4xl font-bold md:text-5xl lg:text-6xl text-slate-700">
-          Discover your <span className="text-rose-500">Dream Home</span>
-          <br /> with Ease
+          Discover your <br className="block min-[505px]:hidden " /> <span className="text-rose-500">Dream Home </span>
+          <br/>
+           with Ease
         </h1>
         <div className="text-xs text-gray-600 sm:text-sm">
           <span className="italic font-medium">RealEstate360 </span>
